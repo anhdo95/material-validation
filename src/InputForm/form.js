@@ -3,7 +3,7 @@ import { Button, TextField } from '@material-ui/core'
 
 export const Form = (props) => {
 	const {
-		values: { name, email, password, confirmPassword },
+		values: { name, email, password, confirmPassword, phoneNumber },
 		errors,
 		touched,
 		handleChange,
@@ -16,6 +16,7 @@ export const Form = (props) => {
 		handleChange(e)
 		setFieldTouched(name, true, false)
 	}
+
 	return (
 		<form
 			onSubmit={() => {
@@ -23,7 +24,6 @@ export const Form = (props) => {
 			}}
 		>
 			<TextField
-				id="name"
 				name="name"
 				helperText={touched.name ? errors.name : ''}
 				error={touched.name && Boolean(errors.name)}
@@ -33,17 +33,16 @@ export const Form = (props) => {
 				fullWidth
 			/>
 			<TextField
-				id="email"
 				name="email"
 				helperText={touched.email ? errors.email : ''}
 				error={touched.email && Boolean(errors.email)}
 				label="Email"
 				fullWidth
+				type="email"
 				value={email}
 				onChange={change.bind(null, 'email')}
 			/>
 			<TextField
-				id="password"
 				name="password"
 				helperText={touched.password ? errors.password : ''}
 				error={touched.password && Boolean(errors.password)}
@@ -54,7 +53,6 @@ export const Form = (props) => {
 				onChange={change.bind(null, 'password')}
 			/>
 			<TextField
-				id="confirmPassword"
 				name="confirmPassword"
 				helperText={touched.confirmPassword ? errors.confirmPassword : ''}
 				error={touched.confirmPassword && Boolean(errors.confirmPassword)}
@@ -64,7 +62,16 @@ export const Form = (props) => {
 				value={confirmPassword}
 				onChange={change.bind(null, 'confirmPassword')}
 			/>
-			<Button type="submit" fullWidth variant="raised" color="primary" disabled={!isValid}>
+			<TextField
+				name="phoneNumber"
+				helperText={touched.phoneNumber ? errors.phoneNumber : ''}
+				error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+				label="Phone Number"
+				fullWidth
+				value={phoneNumber}
+				onChange={change.bind(null, 'phoneNumber')}
+			/>
+			<Button type="submit" fullWidth color="primary" disabled={!isValid}>
 				Submit
 			</Button>
 		</form>

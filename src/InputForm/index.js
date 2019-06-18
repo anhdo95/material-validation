@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Formik } from 'formik'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Form } from './form'
-// import { Paper } from '@material-ui/core'
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
@@ -16,42 +15,34 @@ const validationSchema = Yup.object({
 	confirmPassword: Yup.string('Enter your password')
 		.required('Confirm your password')
 		.oneOf([Yup.ref('password')], 'Password does not match'),
+	phoneNumber: Yup.string('Enter your phone number')
+		.required('Phone number is required')
 })
 
 const styles = (theme) => ({
-	paper: {
-		marginTop: theme.spacing.unit * 8,
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		padding: `${theme.spacing.unit * 5}px ${theme.spacing.unit * 5}px ${theme.spacing.unit * 5}px`,
-	},
 	container: {
-		maxWidth: '200px',
+		maxWidth: '400px',
+		padding: `${theme.spacing(5)}`,
 	},
 })
 
 class InputForm extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {}
-	}
+	static INITIAL_VALUES = { name: '', email: '', confirmPassword: '', password: '', phoneNumber: '' }
+	state = {}
 
 	render() {
 		const classes = this.props
-		const initialValues = { name: '', email: '', confirmPassword: '', password: '' }
 
 		return (
 			<React.Fragment>
 				<div className={classes.container}>
-					{/* <Paper elevation={1} className={classes.paper}> */}
-					<h1>Form</h1>
 					<Formik
-						render={(props) => <Form {...props} />}
-						initialValues={initialValues}
+						// render={(props) => <Form {...props} />}
+						initialValues={InputForm.INITIAL_VALUES}
 						validationSchema={validationSchema}
-					/>
-					{/* </Paper> */}
+					>
+						{(props) => <Form {...props} />}
+					</Formik>
 				</div>
 			</React.Fragment>
 		)
