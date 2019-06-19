@@ -3,10 +3,11 @@ import { Button, TextField } from '@material-ui/core'
 
 export const Form = (props) => {
 	const {
-		values: { name, email, password, confirmPassword, phoneNumber },
+		values: { name, email, password, confirmPassword, phoneNumber, birthDate },
 		errors,
 		touched,
 		handleChange,
+		handleSubmit,
 		isValid,
 		setFieldTouched,
 	} = props
@@ -18,11 +19,7 @@ export const Form = (props) => {
 	}
 
 	return (
-		<form
-			onSubmit={() => {
-				alert('submitted')
-			}}
-		>
+		<form onSubmit={handleSubmit}>
 			<TextField
 				name="name"
 				helperText={touched.name ? errors.name : ''}
@@ -32,6 +29,7 @@ export const Form = (props) => {
 				onChange={change.bind(null, 'name')}
 				fullWidth
 			/>
+
 			<TextField
 				name="email"
 				helperText={touched.email ? errors.email : ''}
@@ -42,6 +40,7 @@ export const Form = (props) => {
 				value={email}
 				onChange={change.bind(null, 'email')}
 			/>
+
 			<TextField
 				name="password"
 				helperText={touched.password ? errors.password : ''}
@@ -52,6 +51,7 @@ export const Form = (props) => {
 				value={password}
 				onChange={change.bind(null, 'password')}
 			/>
+
 			<TextField
 				name="confirmPassword"
 				helperText={touched.confirmPassword ? errors.confirmPassword : ''}
@@ -62,6 +62,7 @@ export const Form = (props) => {
 				value={confirmPassword}
 				onChange={change.bind(null, 'confirmPassword')}
 			/>
+
 			<TextField
 				name="phoneNumber"
 				helperText={touched.phoneNumber ? errors.phoneNumber : ''}
@@ -71,6 +72,21 @@ export const Form = (props) => {
 				value={phoneNumber}
 				onChange={change.bind(null, 'phoneNumber')}
 			/>
+
+			<TextField
+				name="birthDate"
+				helperText={touched.birthDate ? errors.birthDate : ''}
+				error={touched.birthDate && Boolean(errors.birthDate)}
+				label="Birth Date"
+				fullWidth
+				type="date"
+				value={birthDate}
+				onChange={change.bind(null, 'birthDate')}
+				InputLabelProps={{
+					shrink: true,
+				}}
+			/>
+
 			<Button type="submit" fullWidth color="primary" disabled={!isValid}>
 				Submit
 			</Button>
